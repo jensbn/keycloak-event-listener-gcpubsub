@@ -2,7 +2,7 @@ LOCAL_KEYCLOAK_PATH ?= ../keycloak-15.0.2
 KEYCLOAK_PATH ?= ../../docker-build
 
 install:
-	mvn clean install
+	mvn clean package
 
 cp-local-jars: remove-local-jars
 	cp ./target/keycloak-to-gcpubsub-1.0.1.jar $(LOCAL_KEYCLOAK_PATH)/standalone/deployments/keycloak-to-gcpubsub-1.0.1.jar
