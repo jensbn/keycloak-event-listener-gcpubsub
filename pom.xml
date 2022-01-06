@@ -9,7 +9,7 @@
     
     <name>Keycloak: Event Publisher to Google Cloud Pub Sub</name>
     <properties>
-    	<keycloak.version>15.0.2</keycloak.version>
+    	<keycloak.version>15.1.1</keycloak.version>
     	<jar.finalName>${project.artifactId}-${project.version}</jar.finalName>
     </properties>
     
