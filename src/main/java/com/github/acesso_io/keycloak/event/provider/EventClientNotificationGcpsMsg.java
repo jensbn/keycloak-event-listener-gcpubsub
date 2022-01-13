@@ -13,10 +13,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @XmlRootElement
 @JsonTypeInfo(use = Id.CLASS)
-public class EventClientNotificationGcpsMsg extends Event implements Serializable {
+public class EventClientNotificationGcpsMsg extends CustomEventAttributes implements Serializable {
 
 	private static final long serialVersionUID = -2192461924304841222L;
-	private static final String ENV_VAR_APP_NAME = "KC_TO_GCP_APP_NAME";
 
 	private String appName;
 
@@ -28,7 +27,7 @@ public class EventClientNotificationGcpsMsg extends Event implements Serializabl
         this.appName = appName;
     }
 
-	public static EventClientNotificationGcpsMsg create(Event event) {
+	public static EventClientNotificationGcpsMsg create(Event event, String appName) {
 		EventClientNotificationGcpsMsg msg = new EventClientNotificationGcpsMsg();
 		msg.setClientId(event.getClientId());
 		msg.setDetails(event.getDetails());
@@ -39,7 +38,7 @@ public class EventClientNotificationGcpsMsg extends Event implements Serializabl
 		msg.setTime(event.getTime());
 		msg.setType(event.getType());
 		msg.setUserId(event.getUserId());
-		msg.setAppName(Helper.resolveConfigVar(ENV_VAR_APP_NAME));
+		msg.setAppName(appName);
 
 		return msg;
 	}	

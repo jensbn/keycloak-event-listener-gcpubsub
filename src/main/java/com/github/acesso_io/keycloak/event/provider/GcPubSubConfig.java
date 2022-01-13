@@ -14,6 +14,7 @@ public class GcPubSubConfig {
 	private String projectId;
 	private String eventTopicId;
 	private String adminEventTopicId;
+	private String appNameId;
 	
 	public static GcPubSubConfig createFromScope(Scope config) {
 		GcPubSubConfig cfg = new GcPubSubConfig();
@@ -21,6 +22,7 @@ public class GcPubSubConfig {
 		cfg.projectId = resolveConfigVar(config, "projectId", "keycloak-test");
 		cfg.eventTopicId = resolveConfigVar(config, "eventTopicId", "keycloak-events");
 		cfg.adminEventTopicId = resolveConfigVar(config, "adminEventTopicId", "keycloak-events");
+		cfg.appNameId = resolveConfigVar(config, "app_name", "keycloak-app");
         
 		return cfg;
 		
@@ -77,6 +79,12 @@ public class GcPubSubConfig {
 	}
 	public void setAdminEventTopicId(String adminEventTopicId) {
 		this.adminEventTopicId = adminEventTopicId;
+	}
+	public String getAppNameId() {
+		return appNameId;
+	}
+	public void setAppNameId(String appNameId) {
+		this.appNameId = appNameId;
 	}
 
 }

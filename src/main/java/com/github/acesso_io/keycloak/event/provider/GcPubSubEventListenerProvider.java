@@ -30,7 +30,8 @@ public class GcPubSubEventListenerProvider implements EventListenerProvider {
 
 	@Override
 	public void onEvent(Event event) {
-		EventClientNotificationGcpsMsg msg = EventClientNotificationGcpsMsg.create(event);
+		CustomEventAttributes customAttributes = getCustomEventAttributes();
+		EventClientNotificationGcpsMsg msg = EventClientNotificationGcpsMsg.create(event, customAttributes.getAppName());
 		Map<String, String> messageAttributes = GcPubSubAttributes.createMap(event);
 		String messageString = GcPubSubConfig.writeAsJson(msg, true);
 		String topicId = cfg.getAdminEventTopicId();
@@ -38,14 +39,27 @@ public class GcPubSubEventListenerProvider implements EventListenerProvider {
 		this.publishNotification(topicId, messageString, messageAttributes);
 	}
 
+	private CustomEventAttributes getCustomEventAttributes() {
+		CustomEventAttributes customAttributes = new CustomEventAttributes();
+		customAttributes.setAppName(cfg.getAppNameId());
+		return customAttributes;
+	}
+
 	@Override
 	public void onEvent(AdminEvent event, boolean includeRepresentation) {
-		EventAdminNotificationGcpsMsg msg = EventAdminNotificationGcpsMsg.create(event);
+		CustomAdminEventAttributes customAttributes = getCustomAdminEventAttributes();
+		EventAdminNotificationGcpsMsg msg = EventAdminNotificationGcpsMsg.create(event,  customAttributes.getAppName());
 		Map<String, String> messageAttributes = GcPubSubAttributes.createMap(event);
 		String messageString = GcPubSubConfig.writeAsJson(msg, true);
 		String topicId = cfg.getAdminEventTopicId();
 
 		this.publishNotification(topicId, messageString, messageAttributes);
+	}
+
+	private CustomAdminEventAttributes getCustomAdminEventAttributes() {
+		CustomAdminEventAttributes customAttributes = new CustomAdminEventAttributes();
+		customAttributes.setAppName(cfg.getAppNameId());
+		return customAttributes;
 	}
 
 	private void publishNotification(String topicId, String messageString, Map<String, String> attributes) {
