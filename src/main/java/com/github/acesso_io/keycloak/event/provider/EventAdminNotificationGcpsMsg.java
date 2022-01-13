@@ -16,6 +16,17 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 public class EventAdminNotificationGcpsMsg extends AdminEvent implements Serializable  {
 
 	private static final long serialVersionUID = -7367949289101799624L;
+	private static final String ENV_VAR_APP_NAME = "KC_TO_GCP_APP_NAME";
+
+	private String appName;
+
+	public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
 
 	public static EventAdminNotificationGcpsMsg create(AdminEvent adminEvent) {
 		EventAdminNotificationGcpsMsg msg = new EventAdminNotificationGcpsMsg();
@@ -28,8 +39,8 @@ public class EventAdminNotificationGcpsMsg extends AdminEvent implements Seriali
 		msg.setResourceType(adminEvent.getResourceType());
 		msg.setResourceTypeAsString(adminEvent.getResourceTypeAsString());
 		msg.setTime(adminEvent.getTime());
+		msg.setAppName(Helper.resolveConfigVar(ENV_VAR_APP_NAME));
+
 		return msg;
 	}
-
-	
 }
