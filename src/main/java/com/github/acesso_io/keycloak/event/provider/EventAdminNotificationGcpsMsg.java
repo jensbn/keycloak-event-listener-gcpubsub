@@ -13,11 +13,11 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @XmlRootElement
 @JsonTypeInfo(use = Id.CLASS)
-public class EventAdminNotificationGcpsMsg extends AdminEvent implements Serializable  {
+public class EventAdminNotificationGcpsMsg extends CustomAdminEventAttributes implements Serializable  {
 
 	private static final long serialVersionUID = -7367949289101799624L;
 
-	public static EventAdminNotificationGcpsMsg create(AdminEvent adminEvent) {
+	public static EventAdminNotificationGcpsMsg create(AdminEvent adminEvent, String appName) {
 		EventAdminNotificationGcpsMsg msg = new EventAdminNotificationGcpsMsg();
 		msg.setAuthDetails(adminEvent.getAuthDetails());
 		msg.setError(adminEvent.getError());
@@ -28,8 +28,8 @@ public class EventAdminNotificationGcpsMsg extends AdminEvent implements Seriali
 		msg.setResourceType(adminEvent.getResourceType());
 		msg.setResourceTypeAsString(adminEvent.getResourceTypeAsString());
 		msg.setTime(adminEvent.getTime());
+		msg.setAppName(appName);
+
 		return msg;
 	}
-
-	
 }

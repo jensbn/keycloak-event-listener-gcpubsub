@@ -6,6 +6,7 @@ batch
 /subsystem=keycloak-server/spi=eventsListener/provider=keycloak-to-gcpubsub/:map-put(name=properties,key=projectId,value="${env.KC_TO_GCP_PROJECTID:identity-test}")
 /subsystem=keycloak-server/spi=eventsListener/provider=keycloak-to-gcpubsub/:map-put(name=properties,key=eventTopicId,value="${env.KC_TO_GCP_EVENTTOPICID:keycloak-events}")
 /subsystem=keycloak-server/spi=eventsListener/provider=keycloak-to-gcpubsub/:map-put(name=properties,key=adminEventTopicId,value="${env.KC_TO_GCP_ADMINEVENTTOPICID:keycloak-events}")
+/subsystem=keycloak-server/spi=eventsListener/provider=keycloak-to-gcpubsub/:map-put(name=properties,key=appNameId,value="${env.KC_TO_GCP_APP_NAME:keycloak-app}")
 
 run-batch
 stop-embedded-server
