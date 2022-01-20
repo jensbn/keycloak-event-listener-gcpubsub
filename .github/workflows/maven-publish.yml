@@ -24,6 +24,11 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
+    - name: Upload release asset
+      uses: softprops/action-gh-release@v1
+      with:
+        files: target/*.jar
+
     - name: Publish to GitHub Packages Apache Maven
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
